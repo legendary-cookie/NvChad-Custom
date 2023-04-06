@@ -11,4 +11,6 @@ return {
       require "custom.plugins.null-ls"
     end,
   },
+  ["ollykel/v-vim"] = {},
+  ["EthanJWright/vs-tasks.nvim"] = {},
 }
