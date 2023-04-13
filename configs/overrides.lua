@@ -23,14 +23,14 @@ M.treesitter = {
     "kotlin",
     "go",
     "cmake",
-    "bash"
+    "bash",
   },
   indent = {
     enable = true,
     disable = {
-      "python"
+      "python",
     },
-  }
+  },
 }
 
 M.mason = {
@@ -46,13 +46,13 @@ M.mason = {
     "css-lsp",
     "html-lsp",
     "gopls",
-    "protolint"
-  }
+    "protolint",
+  },
 }
 
 M.nvimtree = {
   git = {
-    enable = true
+    enable = true,
   },
   renderer = {
     highlight_git = true,

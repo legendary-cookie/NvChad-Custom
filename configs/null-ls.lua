@@ -9,7 +9,7 @@ local b = null_ls.builtins
 local sources = {
   -- Webdev
   b.formatting.deno_fmt,
-  b.formatting.prettier.with { filetypes = {"html", "markdown", "css" } },
+  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
   -- Clang-format
   b.formatting.clang_format,
   -- Rust
@@ -33,7 +33,12 @@ null_ls.setup {
         group = augroup,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format { bufnr = bufnr }
+          vim.lsp.buf.format {
+            bufnr = bufnr,
+            filter = function(fmtclient)
+              return fmtclient.name == "null-ls"
+            end,
+          }
         end,
       })
     end

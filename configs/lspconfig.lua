@@ -11,7 +11,7 @@ local servers = {
   "tsserver",
   "ansiblels",
   "vls",
-  "ruby_ls"
+  "ruby_ls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -21,11 +21,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+local caps = capabilities
+caps.offsetEncoding = "utf-8"
+
 lspconfig.clangd.setup {
   on_attach = on_attach,
-  capabilities = function ()
-    local caps = capabilities
-    caps.offsetEncoding = "utf-8"
-    return caps
-  end,
+  capabilities = caps
 }
