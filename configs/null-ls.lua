@@ -9,7 +9,7 @@ local b = null_ls.builtins
 local sources = {
   -- Webdev
   b.formatting.deno_fmt,
-  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
+  b.formatting.prettier.with { filetypes = { "html", "css" } },
   -- Clang-format
   b.formatting.clang_format,
   -- Rust

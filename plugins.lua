@@ -23,13 +23,12 @@ local plugins = {
     cmd = { "OverseerRun", "OverseerToggle" },
     config = function()
       require("overseer").setup()
-    end,
-  },
-  {
-    "Pocco81/true-zen.nvim",
-    cmd = { "TZAtaraxis", "TZMinimalist", "TZNarrow", "TZFocus" },
-    config = function()
-      require("true-zen").setup()
+      local templates = {
+        "cpp_build",
+      }
+      for _, tpl in ipairs(templates) do
+        require("overseer").register_template(require("custom.overseer." .. tpl))
+      end
     end,
   },
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
@@ -53,15 +52,64 @@ local plugins = {
     end,
   },
   {
-    "renerocksai/telekasten.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    cmd = { "Telekasten" },
+    "nvim-treesitter/nvim-treesitter",
+    opts = overrides.treesitter,
+  },
+  {
+    "p00f/nvim-ts-rainbow",
+    event = "BufRead",
     config = function()
-      require "custom.configs.telekasten"
+      require("nvim-treesitter.configs").setup {
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
+      }
     end,
   },
+  {
+    "NeogitOrg/neogit",
+    cmd = "Neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function()
+      local neogit = require "neogit"
+      neogit.setup()
+    end,
+  },
+  --[[
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+          local dap, dapui = require "dap", require "dapui"
+          dapui.setup()
+          dap.listeners.after.event_initialized["dapui_config"] = function()
+            dapui.open()
+          end
+          dap.listeners.before.event_terminated["dapui_config"] = function()
+            dapui.close()
+          end
+          dap.listeners.before.event_exited["dapui_config"] = function()
+            dapui.close()
+          end
+        end,
+      },
+    },
+    config = function()
+      require("dapui").setup()
+    end,
+  },
+  ]]
+  --
 }
 
 return plugins

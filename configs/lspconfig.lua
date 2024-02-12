@@ -12,6 +12,10 @@ local servers = {
   "ansiblels",
   "vls",
   "ruby_ls",
+  "als",
+  "zls",
+  "serve_d",
+  "dockerls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -26,5 +30,5 @@ caps.offsetEncoding = "utf-8"
 
 lspconfig.clangd.setup {
   on_attach = on_attach,
-  capabilities = caps
+  capabilities = caps,
 }

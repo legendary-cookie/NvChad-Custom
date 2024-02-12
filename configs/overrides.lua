@@ -15,7 +15,6 @@ M.treesitter = {
     "cpp",
     "rust",
     "toml",
-    "v",
     "zig",
     "terraform",
     "sql",
@@ -24,6 +23,8 @@ M.treesitter = {
     "go",
     "cmake",
     "bash",
+    "ada",
+    "csv",
   },
   indent = {
     enable = true,
@@ -47,6 +48,13 @@ M.mason = {
     "html-lsp",
     "gopls",
     "protolint",
+    "ada-language-server",
+    "zls",
+    "dockerfile-language-server",
+
+    -- go
+    "gopls",
+    "go-debug-adapter",
   },
 }
 

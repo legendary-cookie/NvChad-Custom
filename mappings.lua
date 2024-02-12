@@ -1,11 +1,11 @@
 ---@type MappingsTable
 local M = {}
 
-M.general = {
+M.neogit = {
   n = {
-    ["<C-w>"] = {
-      ":bd!<CR>",
-      "close buffer",
+    ["<Leader>ko"] = {
+      "<cmd> Neogit <CR>",
+      "open neogit ui",
     },
   },
 }
@@ -13,11 +13,11 @@ M.general = {
 M.overseer = {
   n = {
     ["<Leader>ta"] = {
-      ":OverseerRun<CR>",
-      "run task",
+      "<cmd> OverseerRun <CR>",
+      "run overseer task",
     },
     ["<Leader>tt"] = {
-      ":OverseerToggle<CR>",
+      "<cmd> OverseerToggle <CR>",
       "toggle overseer output",
     },
   },
@@ -26,30 +26,8 @@ M.overseer = {
 M.glow = {
   n = {
     ["<Leader>gg"] = {
-      ":Glow<CR>",
+      "<cmd> Glow <CR>",
       "preview markdown",
-    },
-  },
-}
-
-M.zen = {
-  n = {
-    ["<Leader>tza"] = {
-      ":TZAtaraxis<CR>",
-      "ataraxis mode",
-    },
-    ["<Leader>tzm"] = {
-      ":TZMinimalist<CR>",
-      "minimalist mode",
-    },
-
-    ["<Leader>tzn"] = {
-      ":TZNarrow<CR>",
-      "narrow mode",
-    },
-    ["<Leader>tzf"] = {
-      ":TZFocus<CR>",
-      "focus mode",
     },
   },
 }
@@ -105,5 +83,7 @@ M.crates = {
     },
   },
 }
+
+vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 
 return M
