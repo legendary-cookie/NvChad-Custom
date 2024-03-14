@@ -56,16 +56,22 @@ local plugins = {
     opts = overrides.treesitter,
   },
   {
-    "p00f/nvim-ts-rainbow",
+    "HiPhish/rainbow-delimiters.nvim",
     event = "BufRead",
     config = function()
-      require("nvim-treesitter.configs").setup {
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-          max_file_lines = nil,
-        },
+      require("rainbow-delimiters.setup").setup {}
+    end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      local conf = require "plugins.configs.telescope"
+      conf.defaults.mappings.i = {
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<Esc>"] = require("telescope.actions").close,
+        ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
       }
+      return conf
     end,
   },
   {
@@ -83,33 +89,46 @@ local plugins = {
       neogit.setup()
     end,
   },
-  --[[
   {
-    "mfussenegger/nvim-dap",
+    "pwntester/octo.nvim",
+    cmd = "Octo",
     dependencies = {
-      {
-        "rcarriga/nvim-dap-ui",
-        config = function()
-          local dap, dapui = require "dap", require "dapui"
-          dapui.setup()
-          dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.open()
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = function()
-            dapui.close()
-          end
-          dap.listeners.before.event_exited["dapui_config"] = function()
-            dapui.close()
-          end
-        end,
-      },
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("dapui").setup()
+      require("octo").setup()
     end,
   },
-  ]]
-  --
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    config = function()
+      -- require("leap").create_default_mappings()
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+  {
+    "mfussenegger/nvim-dap",
+    lazy = false,
+    dependencies = {
+      "leoluz/nvim-dap-go",
+    },
+    config = function()
+      require "custom.configs.dap"
+      require("dap-go").setup()
+    end,
+  },
 }
 
 return plugins
